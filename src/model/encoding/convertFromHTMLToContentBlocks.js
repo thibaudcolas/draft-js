@@ -83,6 +83,8 @@ const inlineTags = {
   strong: 'BOLD',
   u: 'UNDERLINE',
   mark: 'HIGHLIGHT',
+  sup: 'SUPERSCRIPT',
+  sub: 'SUBSCRIPT',
 };
 
 const knownListItemDepthClasses = {
@@ -205,6 +207,7 @@ const processInlineTag = (
         const fontWeight = htmlElement.style.fontWeight;
         const fontStyle = htmlElement.style.fontStyle;
         const textDecoration = htmlElement.style.textDecoration;
+        const verticalAlign = htmlElement.style.verticalAlign;
 
         if (boldValues.indexOf(fontWeight) >= 0) {
           style.add('BOLD');
@@ -227,6 +230,14 @@ const processInlineTag = (
         if (textDecoration === 'none') {
           style.remove('UNDERLINE');
           style.remove('STRIKETHROUGH');
+        }
+
+        console.log(verticalAlign);
+
+        if (verticalAlign === 'super') {
+          style.add('SUPERSCRIPT');
+        } else if (verticalAlign === 'sub') {
+          style.add('SUBSCRIPT');
         }
       })
       .toOrderedSet();

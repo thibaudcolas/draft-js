@@ -68,6 +68,8 @@ const HTMLTagToInlineStyleMap: Map<string, string> = Map({
   strong: 'BOLD',
   u: 'UNDERLINE',
   mark: 'HIGHLIGHT',
+  sup: 'SUPERSCRIPT',
+  sub: 'SUBSCRIPT',
 });
 
 type BlockTypeMap = Map<string, string | Array<string>>;
@@ -609,6 +611,7 @@ class ContentBlocksBuilder {
     const fontWeight = htmlElement.style.fontWeight;
     const fontStyle = htmlElement.style.fontStyle;
     const textDecoration = htmlElement.style.textDecoration;
+    const verticalAlign = htmlElement.style.verticalAlign;
 
     if (boldValues.indexOf(fontWeight) >= 0) {
       this.addStyle('BOLD');
@@ -631,6 +634,12 @@ class ContentBlocksBuilder {
     if (textDecoration === 'none') {
       this.removeStyle('UNDERLINE');
       this.removeStyle('STRIKETHROUGH');
+    }
+
+    if (verticalAlign === 'super') {
+      this.addStyle('SUPERSCRIPT');
+    } else if (verticalAlign === 'sub') {
+      this.addStyle('SUBSCRIPT');
     }
   }
 

@@ -131,6 +131,16 @@ const styleMap = {
     fontSize: 16,
     padding: 2,
   },
+  SUPERSCRIPT: {
+    fontSize: '80%',
+    verticalAlign: 'super',
+    lineHeight: '1',
+  },
+  SUBSCRIPT: {
+    fontSize: '80%',
+    verticalAlign: 'sub',
+    lineHeight: '1',
+  },
 };
 
 function getBlockStyle(block) {
